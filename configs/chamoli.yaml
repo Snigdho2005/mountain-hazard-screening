@@ -51,6 +51,12 @@ change:
 zones:
   min_area_m2: 5000
 
+# Follow-up experiment A (declared 2 Nov 2026, before the difference map was opened):
+# Shean et al. (2021) post-event (10-11 Feb 2021) minus pre-event (Sept 2015) 2 m DEM difference,
+# Zenodo 10.5281/zenodo.4558692, CC BY-NC 4.0. Heights are ellipsoidal; the difference is unaffected.
+dem_change:
+  diff: ../data/chamoli/shean_diff_2m.tif
+
 physics:
   dz_sigma_m: 2.0
   # Available-volume scenarios must come from published or field evidence.
@@ -78,6 +84,11 @@ evaluation:
       - {name: "Rishiganga HEP", lon: 79.699903, lat: 30.478344, published_km: 15, ref: "GEER Fig. 1.2 C; Shugar et al. 2021 (~15 km)"}
       - {name: "Rishiganga-Dhauliganga confluence", lon: 79.690131, lat: 30.488206, published_km: null, ref: "GEER Fig. 1.2 D"}
       - {name: "Tapovan HEP", lon: 79.631253, lat: 30.492458, published_km: 26, ref: "GEER Fig. 1.2 E; Shugar et al. 2021 (26 km)"}
+    date: "2021-02-07"
+    # Published collapse volume. NOTE: derived by Shugar et al. from the same Shean et al. DEMs used in
+    # experiment A, so agreement is a reproduction check, not independent validation.
+    published_volume_m3: {central: 26.9e6, low: 26.5e6, high: 27.3e6, ref: "Shugar et al. 2021 (95% CI)"}
+    published_source_elevation_m: 5500
     damaged_assets:         # documented damage, used only to score exposure agreement
       - {name: "Rishiganga HEP", lon: 79.699903, lat: 30.478344}
       - {name: "Raini bridge", lon: 79.694322, lat: 30.485542}

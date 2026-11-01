@@ -113,6 +113,25 @@ DEFAULTS: dict = {
         "valley_accum_km2": 2.0,
         "fill_depth_flag_m": 30.0,   # 30 m GLO-30 has pits in deep gorges
     },
+    # Elevation-change source detection (follow-up experiment A, docs/followup_protocol.md).
+    "dem_change": {
+        "diff": None,                 # post-minus-pre DEM difference (any grid; resampled by averaging)
+        "loss_threshold_m": 5.0,      # a pixel is "lowered" if dz <= -max(loss_threshold_m, k * NMAD)
+        "loss_sigma_factor": 3.0,     # k
+        "min_area_m2": 5000.0,
+        "opening_px": 1,
+        "stable_max_slope_deg": 35.0,  # stable terrain for NMAD: gentler than this ...
+        "stable_exclude_corridor_m": 500.0,  # ... outside this distance of the documented route ...
+        "stable_max_ndsi": 0.4,        # ... and snow-free (NDSI below this) on both image dates
+        # Material is unknown from elevation change alone: one declared range for every lowered zone,
+        # from glacier ice to dense rock.
+        "density_kg_m3": [900, 2700],
+    },
+    # Climate indicators for the instability record (follow-up experiment D).
+    "climate": {
+        "reference_years": [1991, 2020],
+        "windows_days": [1, 3, 7, 30],
+    },
     # Retrospective event evaluation (paper Section 8: ranking, removal tests, pathway).
     # The reference event is declared here, from published sources, before outcomes are examined.
     "evaluation": {
@@ -147,6 +166,9 @@ def load_config(path: str | Path | None = None, overrides: dict | None = None) -
         for k, v in cfg["inputs"].items():
             if isinstance(v, str) and not Path(v).is_absolute():
                 cfg["inputs"][k] = str((base / v).resolve())
+        d = cfg["dem_change"].get("diff")
+        if isinstance(d, str) and not Path(d).is_absolute():
+            cfg["dem_change"]["diff"] = str((base / d).resolve())
     if overrides:
         cfg = deep_merge(cfg, overrides)
     return cfg

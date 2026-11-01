@@ -238,3 +238,53 @@ def test_event_evaluation_on_synthetic(tmp_path):
     b = dict(a, energy=1.0)
     assert rank_key(a, VARIANTS["full"]) < rank_key(b, VARIANTS["full"])
     assert rank_key(a, VARIANTS["no_energy"]) == rank_key(b, VARIANTS["no_energy"])
+
+
+def test_followup_dem_change_and_change_accuracy(tmp_path):
+    import datetime as dt
+    from rasterio.warp import transform as tr
+
+    from mhs.change_accuracy import change_accuracy, change_points
+    from mhs.climate import window_indicators
+    from mhs.config import load_config
+    from mhs.dem_change import dem_change, dem_change_figure, summary_markdown
+    from mhs.io import read_raster, write_raster
+    from mhs.pipeline import run_pipeline
+    from mhs.synthetic import generate
+
+    g = generate(tmp_path / "d", seed=3)
+    cfg = load_config(g["config"])
+    cfg["output"]["figures"] = False
+    a, b = read_raster(cfg["inputs"]["dem_t1"]), read_raster(cfg["inputs"]["dem_t2"])
+    d = (b.data[0] - a.data[0]).astype("float32")
+    write_raster(tmp_path / "diff.tif", a.like(d[None], ["dz"], np.nan), "float32")
+    r0, c0 = np.unravel_index(np.nanargmin(d), d.shape)
+    x, y = a.xy(r0, c0)
+    lon, lat = (v[0] for v in tr(a.crs, "EPSG:4326", [float(x)], [float(y)]))
+    cfg["evaluation"]["event"] = {"name": "syn", "source": {"lon": lon, "lat": lat}, "checkpoints": [],
+                                  "damaged_assets": [], "published_volume_m3": {"central": 1e5}}
+    r = dem_change(cfg, tmp_path / "dc", str(tmp_path / "diff.tif"), log=lambda *x: None)
+    assert r["n_zones"] >= 1 and r["ranking"]["500"]["zones_matched"] == 1
+    assert r["source_zone"]["loss_m3"] > 0 and r["source_zone"]["energy_J"]["median"] > 0
+    dem_change_figure(cfg, r, tmp_path / "dc")
+    assert "Source zone" in summary_markdown(r)
+
+    run_pipeline(cfg, None, tmp_path / "run", log=lambda *x: None)
+    cp = change_points(cfg, tmp_path / "run", tmp_path / "cp", (4, 4, 4, 6), min_sep_m=30)
+    gj = json.loads((tmp_path / "cp" / "change_points.geojson").read_text())
+    assert all(set(f["properties"]) == {"id", "label"} for f in gj["features"])   # stratum hidden
+    key = json.loads((tmp_path / "cp" / "change_points_key.json").read_text())
+    for f in gj["features"]:   # oracle labels = rule-baseline change -> baseline scores perfectly
+        k = key["points"][f["properties"]["id"]]
+        f["properties"]["label"] = "change" if k["stratum"] in ("both", "rules_only") else "no_change"
+    (tmp_path / "cp" / "lab.geojson").write_text(json.dumps(gj))
+    ca = change_accuracy(cfg, tmp_path / "cp" / "lab.geojson", tmp_path / "cp" / "change_points_key.json",
+                         [tmp_path / "run"], n_boot=50)
+    base = ca["maps"]["rule baseline (classes + CVA)"]["estimate"]
+    assert cp["points"] > 0 and abs(base["overall_accuracy"] - 1.0) < 1e-9
+
+    dates = [dt.date(1990, 1, 1) + dt.timedelta(days=i) for i in range(11400)]
+    rng = np.random.default_rng(0)
+    wi = window_indicators(dates, rng.gamma(0.5, 4, len(dates)), rng.normal(0, 5, len(dates)),
+                           dt.date(2021, 2, 7), [1, 7], [1991, 2020])
+    assert wi["7d"]["n_reference_years"] == 30 and wi["7d"]["precip"]["method"] == "percentile"

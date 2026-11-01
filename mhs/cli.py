@@ -14,6 +14,10 @@
   mhs rasterize-labels CONFIG --polygons F --out labels.tif   polygons (class, date) -> label raster
   mhs osm-assets CONFIG --out assets.geojson   settlements / hydropower / bridges from OpenStreetMap
   mhs event-eval CONFIG RUN_DIR [--out DIR]    ranking, removal tests, pathway, exposure vs documented event
+  mhs dem-change CONFIG --out DIR [--diff F]   source detection, volume, energy, ranking from a DEM difference
+  mhs climate CONFIG --out DIR                 ERA5 rainfall / temperature anomalies before the event
+  mhs change-points CONFIG RUN_DIR --out DIR   blind stratified points for change-accuracy labelling
+  mhs change-accuracy CONFIG --labels F --key F RUN_DIR [RUN_DIR ...]   area-weighted change accuracy
 """
 from __future__ import annotations
 
@@ -244,6 +248,13 @@ def main(argv=None):
     p.add_argument("--out", required=True)
     p = sub.add_parser("osm-assets"); p.add_argument("config"); p.add_argument("--out", required=True)
     p = sub.add_parser("event-eval"); p.add_argument("config"); p.add_argument("run_dir"); p.add_argument("--out")
+    p = sub.add_parser("dem-change"); p.add_argument("config"); p.add_argument("--out", required=True)
+    p.add_argument("--diff")
+    p = sub.add_parser("climate"); p.add_argument("config"); p.add_argument("--out", required=True)
+    p = sub.add_parser("change-points"); p.add_argument("config"); p.add_argument("run_dir")
+    p.add_argument("--out", required=True); p.add_argument("--n", type=int, nargs=4, default=[15, 15, 15, 25])
+    p = sub.add_parser("change-accuracy"); p.add_argument("config"); p.add_argument("run_dirs", nargs="+")
+    p.add_argument("--labels", required=True); p.add_argument("--key", required=True); p.add_argument("--out")
     p = sub.add_parser("regrid"); p.add_argument("src"); p.add_argument("--like", required=True)
     p.add_argument("--out", required=True); p.add_argument("--resampling", default="average")
     a = ap.parse_args(argv)
@@ -330,6 +341,41 @@ def main(argv=None):
         (out / "event_eval.json").write_text(json.dumps(ev, indent=2, default=float))
         print(md)
         print(f"wrote {out}/event_eval.md, event_eval.json, event_route.png")
+    elif a.cmd == "dem-change":
+        from .dem_change import dem_change, dem_change_figure, summary_markdown as md_dc
+
+        cfg = load_config(a.config)
+        r = dem_change(cfg, a.out, a.diff)
+        dem_change_figure(cfg, r, a.out)
+        r.pop("_route_path", None)
+        Path(a.out, "dem_change.json").write_text(json.dumps(r, indent=2, default=float))
+        md = md_dc(r)
+        Path(a.out, "dem_change.md").write_text(md)
+        print(md)
+        print(f"wrote {a.out}/dem_change.md, dem_change.json, dem_change.png, dem_loss_zones.tif, dz_10m.tif")
+    elif a.cmd == "climate":
+        from .climate import climate_record, summary_markdown as md_cl
+
+        r = climate_record(load_config(a.config))
+        Path(a.out).mkdir(parents=True, exist_ok=True)
+        Path(a.out, "climate.json").write_text(json.dumps(r, indent=2, default=float))
+        md = md_cl(r)
+        Path(a.out, "climate.md").write_text(md)
+        print(md)
+    elif a.cmd == "change-points":
+        from .change_accuracy import change_points
+
+        print(json.dumps(change_points(load_config(a.config), a.run_dir, a.out, tuple(a.n)), indent=2))
+    elif a.cmd == "change-accuracy":
+        from .change_accuracy import change_accuracy, summary_markdown as md_ca
+
+        r = change_accuracy(load_config(a.config), a.labels, a.key, a.run_dirs)
+        md = md_ca(r)
+        if a.out:
+            Path(a.out).mkdir(parents=True, exist_ok=True)
+            Path(a.out, "change_accuracy.json").write_text(json.dumps(r, indent=2, default=float))
+            Path(a.out, "change_accuracy.md").write_text(md)
+        print(md)
     elif a.cmd == "regrid":
         from .io import read_raster, regrid, write_raster
 

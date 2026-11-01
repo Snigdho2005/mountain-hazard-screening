@@ -31,13 +31,15 @@ Full write-up: **[docs/chamoli_case_study.md](docs/chamoli_case_study.md)**. Out
 
 ![Route from the documented source](results/chamoli_2021/figures/event_route_rules.png)
 
+**Follow-up experiments** (protocol fixed in advance, 2 Nov 2026): source detection, volume and energy from the 2 m DEM difference; change-detection accuracy; rainfall/temperature indicators. See [docs/followup_protocol.md](docs/followup_protocol.md).
+
 Every output is a screening product for specialist review. Energy is **available gravitational potential energy**. It is not a failure probability, runout, impact force or loss. Routes are **screening corridors**, not runout or inundation boundaries.
 
 ## Quick start
 
 ```bash
 pip install -e ".[dev]"            # + ".[acquire]" where internet is available
-pytest -q                          # 18 tests
+pytest -q                          # 19 tests
 mhs demo --out demo_output         # synthetic dev catchment → unseen test catchment, ~2 min on CPU
 mhs chamoli                        # paper Section 9 sensitivity calculation
 ```
@@ -62,6 +64,10 @@ The notebooks that produced the case-study numbers are `notebooks/kaggle_01_froz
 | `mhs label-aid CONFIG --out DIR [--steep]` | Random test-strip points for unbiased labelling |
 | `mhs osm-assets CONFIG --out assets.geojson` | Settlements, bridges, hydropower from OpenStreetMap for the whole scene |
 | `mhs event-eval CONFIG RUN_DIR` | Ranking, removal tests, pathway and exposure against a documented event |
+| `mhs dem-change CONFIG --out DIR` | Lowered zones from a DEM difference: detection, volume, energy, ranking and removal tests |
+| `mhs climate CONFIG --out DIR` | ERA5 rainfall and temperature anomalies before the event (Open-Meteo archive) |
+| `mhs change-points CONFIG RUN --out DIR` | Blind stratified random points for change/no-change labelling |
+| `mhs change-accuracy CONFIG --labels F --key F RUN...` | Area-weighted change precision, recall, F1 with bootstrap intervals |
 
 ## Where each part of the paper lives
 
