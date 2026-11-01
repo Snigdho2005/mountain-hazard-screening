@@ -1,0 +1,84 @@
+# First real case study: Rishiganga / Dhauliganga, Chamoli (Uttarakhand), 2021 event.
+# The bbox is approximate. It is meant to cover Ronti Peak, Ronti Gad, Raini and
+# Tapovan. Check it against the source polygon in Shugar et al. (2021, Science)
+# and widen it if the source or the downstream assets fall outside.
+case:
+  name: chamoli_2021
+  bbox: [79.58, 30.33, 79.80, 30.54]   # min_lon, min_lat, max_lon, max_lat (approximate)
+  crs: EPSG:32644                      # UTM 44N
+  resolution: 10.0
+  notes: >
+    Retrospective test. t1 and t2 from the same winter, days before and after
+    7 Feb 2021; t3 (winter 2022) confirms persistence. First run with a Feb 2020 t1
+    was dominated by inter-annual snow differences and is kept as a recorded failure.
+
+acquire:
+  dates:
+    # t1: days before the 7 Feb 2021 event (~04:50 UTC). Sentinel-2 passes at ~05:20 UTC,
+    # so the window must end on 6 Feb. Same winter as t2 -> similar snow cover.
+    # (A Feb-Mar 2020 t1 gave mostly seasonal snow differences.)
+    - 2021-01-15T00:00:00Z/2021-02-06T23:59:59Z
+    - 2021-02-08T00:00:00Z/2021-03-10T23:59:59Z   # t2: post-event, same winter
+    # t3: same season one year later. An October t3 confirmed seasonal snow melt as
+    # "persistent"; a winter t3 can tell melt from a lasting surface change.
+    - 2022-01-15T00:00:00Z/2022-03-15T23:59:59Z
+  max_cloud: 30
+
+inputs:
+  t1: ../data/chamoli/t1.tif
+  t2: ../data/chamoli/t2.tif
+  t3: ../data/chamoli/t3.tif
+  dem: ../data/chamoli/dem.tif
+  # Shean et al. (2021) 2 m DEMs, resampled to the image grid with `mhs regrid`:
+  dem_t1: null   # ../data/chamoli/dem_pre_10m.tif
+  dem_t2: null   # ../data/chamoli/dem_post_10m.tif
+  labels: ../data/chamoli/labels.tif   # weak labels + hand digitised soil/debris
+  assets: ../data/chamoli/assets.geojson
+
+model:
+  split:
+    # The 2021 flood channel lies ~65-75% across the scene. With validation on the
+    # east side it fell in the validation strip, so no debris examples reached
+    # training. Validation moved to the west edge; the east test strip is unchanged.
+    val_side: west
+
+change:
+  # rock and soil look alike at 10 m and swap with low winter sun; they are not
+  # hazard sources here, so their swaps are not counted as change.
+  ignore_transitions:
+    - [rock, soil]
+
+zones:
+  min_area_m2: 5000
+
+physics:
+  dz_sigma_m: 2.0
+  # Available-volume scenarios must come from published or field evidence.
+  # Left empty on purpose: every zone stays an area-change record until filled.
+  thickness_scenarios_m: {}
+  energy_threshold_J: 1.0e14
+
+routing:
+  max_route_km: 40.0
+  corridor_halfwidth_m: 250.0
+
+# Reference event for the retrospective evaluation. Fixed from published sources before the
+# ranking / removal / pathway tests were run. Coordinates: GEER reconnaissance report on the
+# 2021 Chamoli event (Figure 1.2 and Section 3). Distances: Shugar et al. (2021, Science).
+evaluation:
+  event:
+    name: "Chamoli rock-ice avalanche, 7 Feb 2021"
+    source:
+      name: "detachment, north face of Ronti Peak (~5,500 m)"
+      lon: 79.716431
+      lat: 30.376403
+      ref: "GEER Chamoli report, Fig. 1.2 point A"
+    checkpoints:            # downstream points the real flow passed, in order
+      - {name: "Ronti Gad", lon: 79.721864, lat: 30.394242, published_km: null, ref: "GEER Fig. 1.2 B"}
+      - {name: "Rishiganga HEP", lon: 79.699903, lat: 30.478344, published_km: 15, ref: "GEER Fig. 1.2 C; Shugar et al. 2021 (~15 km)"}
+      - {name: "Rishiganga-Dhauliganga confluence", lon: 79.690131, lat: 30.488206, published_km: null, ref: "GEER Fig. 1.2 D"}
+      - {name: "Tapovan HEP", lon: 79.631253, lat: 30.492458, published_km: 26, ref: "GEER Fig. 1.2 E; Shugar et al. 2021 (26 km)"}
+    damaged_assets:         # documented damage, used only to score exposure agreement
+      - {name: "Rishiganga HEP", lon: 79.699903, lat: 30.478344}
+      - {name: "Raini bridge", lon: 79.694322, lat: 30.485542}
+      - {name: "Tapovan HEP", lon: 79.631253, lat: 30.492458}

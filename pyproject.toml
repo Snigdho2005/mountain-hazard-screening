@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mhs"
+version = "0.1.0"
+description = "Physics-guided screening of mountain hazard source zones from multi-temporal satellite imagery"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "numpy>=1.24",
+  "scipy>=1.10",
+  "scikit-image>=0.21",
+  "rasterio>=1.3",
+  "shapely>=2.0",
+  "pyyaml>=6.0",
+  "matplotlib>=3.7",
+  "torch>=2.1",
+]
+
+[project.optional-dependencies]
+acquire = ["pystac-client>=0.7", "planetary-computer>=1.0"]
+dev = ["pytest>=7"]
+
+[project.scripts]
+mhs = "mhs.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["mhs*"]

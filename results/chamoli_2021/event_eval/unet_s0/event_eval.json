@@ -1,0 +1,273 @@
+{
+  "event": "Chamoli rock-ice avalanche, 7 Feb 2021",
+  "run_dir": "runs/chamoli_unet_s0",
+  "method": "unet",
+  "n_zones": 371,
+  "source_diagnostics_1km": {
+    "elevation_m": 5288.8,
+    "slope_deg": 39.2,
+    "aspect_deg": 43.7,
+    "usable_both_dates": 0.861,
+    "shadow_t1": 0.731,
+    "shadow_t2": 0.47,
+    "shadow_both": 0.47,
+    "class_fractions_t1": {
+      "background": 0.0,
+      "snow_ice": 0.697,
+      "rock": 0.001,
+      "soil": 0.264,
+      "debris": 0.037
+    },
+    "class_fractions_t2": {
+      "snow_ice": 0.709,
+      "rock": 0.004,
+      "soil": 0.283,
+      "debris": 0.004
+    },
+    "changed_pixels_before_zone_rules": 112,
+    "in_zones_pixels": 0
+  },
+  "ranking": {
+    "500": {
+      "zones_matched": 0,
+      "matched": [],
+      "random_expected_best_rank": null,
+      "variants": {
+        "full": {
+          "best_rank": null
+        },
+        "no_energy": {
+          "best_rank": null
+        },
+        "no_instability": {
+          "best_rank": null
+        },
+        "no_exposure": {
+          "best_rank": null
+        },
+        "no_route_(and_corridor_exposure)": {
+          "best_rank": null
+        },
+        "baseline_area_only": {
+          "best_rank": null
+        },
+        "baseline_confidence_then_area": {
+          "best_rank": null
+        },
+        "pipeline_as_run": {
+          "best_rank": null
+        }
+      }
+    },
+    "1000": {
+      "zones_matched": 0,
+      "matched": [],
+      "random_expected_best_rank": null,
+      "variants": {
+        "full": {
+          "best_rank": null
+        },
+        "no_energy": {
+          "best_rank": null
+        },
+        "no_instability": {
+          "best_rank": null
+        },
+        "no_exposure": {
+          "best_rank": null
+        },
+        "no_route_(and_corridor_exposure)": {
+          "best_rank": null
+        },
+        "baseline_area_only": {
+          "best_rank": null
+        },
+        "baseline_confidence_then_area": {
+          "best_rank": null
+        },
+        "pipeline_as_run": {
+          "best_rank": null
+        }
+      }
+    },
+    "2000": {
+      "zones_matched": 1,
+      "matched": [
+        {
+          "id": 359,
+          "transition": "debris->snow_ice",
+          "area_m2": 6500.0,
+          "persistence": "persistent"
+        }
+      ],
+      "random_expected_best_rank": 186.0,
+      "variants": {
+        "full": {
+          "best_rank": 83,
+          "percentile": 0.224,
+          "top_5": false,
+          "top_10": false,
+          "top_25": false
+        },
+        "no_energy": {
+          "best_rank": 83,
+          "percentile": 0.224,
+          "top_5": false,
+          "top_10": false,
+          "top_25": false
+        },
+        "no_instability": {
+          "best_rank": 314,
+          "percentile": 0.846,
+          "top_5": false,
+          "top_10": false,
+          "top_25": false
+        },
+        "no_exposure": {
+          "best_rank": 81,
+          "percentile": 0.218,
+          "top_5": false,
+          "top_10": false,
+          "top_25": false
+        },
+        "no_route_(and_corridor_exposure)": {
+          "best_rank": 82,
+          "percentile": 0.221,
+          "top_5": false,
+          "top_10": false,
+          "top_25": false
+        },
+        "baseline_area_only": {
+          "best_rank": 292,
+          "percentile": 0.787,
+          "top_5": false,
+          "top_10": false,
+          "top_25": false
+        },
+        "baseline_confidence_then_area": {
+          "best_rank": 334,
+          "percentile": 0.9,
+          "top_5": false,
+          "top_10": false,
+          "top_25": false
+        },
+        "pipeline_as_run": {
+          "best_rank": 84,
+          "percentile": 0.226,
+          "top_5": false,
+          "top_10": false,
+          "top_25": false
+        }
+      }
+    }
+  },
+  "energy_note": "energy term is an index (rho*g*area*drop, J per metre of thickness): no thickness scenario declared",
+  "pathway_from_documented_source": {
+    "length_km": 30.65,
+    "qc_flags": [
+      "route_crosses_34m_filled_depression_check_lake_dam_or_dem_artefact"
+    ],
+    "reference_elevation_m": 3568.9,
+    "checkpoints": [
+      {
+        "name": "Ronti Gad",
+        "closest_m": 78.1,
+        "reached": true,
+        "along_route_km": 2.41,
+        "path_index": 217,
+        "published_km": null,
+        "ref": "GEER Fig. 1.2 B"
+      },
+      {
+        "name": "Rishiganga HEP",
+        "closest_m": 28.3,
+        "reached": true,
+        "along_route_km": 15.58,
+        "path_index": 1340,
+        "published_km": 15,
+        "ref": "GEER Fig. 1.2 C; Shugar et al. 2021 (~15 km)",
+        "difference_km": 0.58
+      },
+      {
+        "name": "Rishiganga-Dhauliganga confluence",
+        "closest_m": 51.0,
+        "reached": true,
+        "along_route_km": 17.14,
+        "path_index": 1465,
+        "published_km": null,
+        "ref": "GEER Fig. 1.2 D"
+      },
+      {
+        "name": "Tapovan HEP",
+        "closest_m": 28.3,
+        "reached": true,
+        "along_route_km": 23.49,
+        "path_index": 2030,
+        "published_km": 26,
+        "ref": "GEER Fig. 1.2 E; Shugar et al. 2021 (26 km)",
+        "difference_km": -2.51
+      }
+    ],
+    "n_reached": 4,
+    "n_checkpoints": 4,
+    "reached_in_order": true
+  },
+  "exposure_from_documented_source": {
+    "inventory": "/kaggle/working/mhs-project/data/chamoli/assets.geojson",
+    "inventory_size": 45,
+    "assets_in_corridor": [
+      {
+        "name": "Reni Bridge (Destroyed)",
+        "type": "bridge",
+        "along_route_m": 16635.870119269177
+      },
+      {
+        "name": "Reni",
+        "type": "settlement",
+        "along_route_m": 16879.717882377663
+      },
+      {
+        "name": "Joshimath-Malari Road",
+        "type": "bridge",
+        "along_route_m": 17992.266222337013
+      },
+      {
+        "name": "unnamed bridge",
+        "type": "bridge",
+        "along_route_m": 24298.561312727008
+      },
+      {
+        "name": "Garghaniya",
+        "type": "settlement",
+        "along_route_m": 25003.536059557548
+      },
+      {
+        "name": "unnamed bridge",
+        "type": "bridge",
+        "along_route_m": 25154.957415794845
+      }
+    ],
+    "documented_damage": [
+      {
+        "name": "Rishiganga HEP",
+        "location_in_corridor": true,
+        "inventory_assets_within_500m": []
+      },
+      {
+        "name": "Raini bridge",
+        "location_in_corridor": true,
+        "inventory_assets_within_500m": [
+          "Reni Bridge (Destroyed)",
+          "Reni"
+        ]
+      },
+      {
+        "name": "Tapovan HEP",
+        "location_in_corridor": true,
+        "inventory_assets_within_500m": []
+      }
+    ],
+    "damaged_sites_in_corridor": 3,
+    "damaged_sites_matched_by_inventory": 1
+  }
+}

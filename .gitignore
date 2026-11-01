@@ -1,0 +1,22 @@
+# downloaded inputs, trained models and run outputs (regenerate with the commands in the README)
+data/
+runs/
+models/
+demo_output/
+label_aid/
+previews/
+*.tif
+*.pt
+*.zip
+
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# macOS
+.DS_Store
