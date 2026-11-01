@@ -1,6 +1,6 @@
 # Mountain Hazard Screening (`mhs`)
 
-Working implementation of the concept paper *Physics-Guided Mapping of Mountain Hazard Source Zones from Multi-Temporal Satellite Imagery*.
+Working implementation of the concept paper *Physics-Guided Mapping of Mountain Hazard Source Zones from Multi-Temporal Satellite Imagery* ([docs/concept_paper.docx](docs/concept_paper.docx)).
 It runs the paper's minimum viable pipeline end to end:
 
 ```
@@ -19,7 +19,7 @@ A rule-based baseline (spectral-index classes + change-vector differencing) runs
 
 ## First case study: 2021 Chamoli rock–ice avalanche
 
-Full write-up: **[docs/chamoli_case_study.md](docs/chamoli_case_study.md)**. Outputs: [`results/chamoli_2021/`](results/chamoli_2021/).
+Full write-up: **[docs/chamoli_case_study.md](docs/chamoli_case_study.md)**. Outputs: [`results/chamoli_2021/`](results/chamoli_2021/). Reference labels (63 polygons): [`results/chamoli_2021/labels.geojson`](results/chamoli_2021/labels.geojson).
 
 | Test (concept paper §8) | Result |
 |---|---|
