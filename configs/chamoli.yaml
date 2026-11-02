@@ -62,7 +62,7 @@ physics:
   # Available-volume scenarios must come from published or field evidence.
   # Left empty on purpose: every zone stays an area-change record until filled.
   thickness_scenarios_m: {}
-  energy_threshold_J: 1.0e14
+  energy_threshold_J: 1.0e+14
 
 routing:
   max_route_km: 40.0
@@ -87,7 +87,7 @@ evaluation:
     date: "2021-02-07"
     # Published collapse volume. NOTE: derived by Shugar et al. from the same Shean et al. DEMs used in
     # experiment A, so agreement is a reproduction check, not independent validation.
-    published_volume_m3: {central: 26.9e6, low: 26.5e6, high: 27.3e6, ref: "Shugar et al. 2021 (95% CI)"}
+    published_volume_m3: {central: 2.69e+7, low: 2.65e+7, high: 2.73e+7, ref: "Shugar et al. 2021 (95% CI)"}
     published_source_elevation_m: 5500
     damaged_assets:         # documented damage, used only to score exposure agreement
       - {name: "Rishiganga HEP", lon: 79.699903, lat: 30.478344}

@@ -8,6 +8,7 @@ them in a YAML file rather than in code.
 from __future__ import annotations
 
 import copy
+import re
 from pathlib import Path
 
 import yaml
@@ -147,6 +148,20 @@ DEFAULTS: dict = {
 }
 
 
+_SCI = re.compile(r"^[+-]?(\d+\.?\d*|\.\d+)[eE][+-]?\d+$")
+
+
+def _numbers(x):
+    """PyYAML reads '1.0e14' (no sign in the exponent) as a string; turn such strings into floats."""
+    if isinstance(x, dict):
+        return {k: _numbers(v) for k, v in x.items()}
+    if isinstance(x, list):
+        return [_numbers(v) for v in x]
+    if isinstance(x, str) and _SCI.match(x.strip()):
+        return float(x)
+    return x
+
+
 def deep_merge(base: dict, override: dict) -> dict:
     out = copy.deepcopy(base)
     for k, v in (override or {}).items():
@@ -161,7 +176,7 @@ def load_config(path: str | Path | None = None, overrides: dict | None = None) -
     cfg = copy.deepcopy(DEFAULTS)
     if path:
         with open(path) as f:
-            cfg = deep_merge(cfg, yaml.safe_load(f) or {})
+            cfg = deep_merge(cfg, _numbers(yaml.safe_load(f) or {}))
         base = Path(path).resolve().parent
         for k, v in cfg["inputs"].items():
             if isinstance(v, str) and not Path(v).is_absolute():

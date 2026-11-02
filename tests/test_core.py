@@ -288,3 +288,12 @@ def test_followup_dem_change_and_change_accuracy(tmp_path):
     wi = window_indicators(dates, rng.gamma(0.5, 4, len(dates)), rng.normal(0, 5, len(dates)),
                            dt.date(2021, 2, 7), [1, 7], [1991, 2020])
     assert wi["7d"]["n_reference_years"] == 30 and wi["7d"]["precip"]["method"] == "percentile"
+
+
+def test_config_reads_scientific_notation(tmp_path):
+    from mhs.config import load_config
+
+    p = tmp_path / "c.yaml"
+    p.write_text("physics:\n  energy_threshold_J: 1.0e14\nevaluation:\n  event:\n    v: [26.9e6, 'text']\n")
+    c = load_config(p)
+    assert c["physics"]["energy_threshold_J"] == 1e14 and c["evaluation"]["event"]["v"] == [26.9e6, "text"]
