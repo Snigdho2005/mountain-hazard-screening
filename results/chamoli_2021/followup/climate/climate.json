@@ -1,0 +1,108 @@
+{
+  "event": "Chamoli rock-ice avalanche, 7 Feb 2021",
+  "location": {
+    "lat": 30.376403,
+    "lon": 79.716431
+  },
+  "reanalysis": "era5",
+  "cell_elevation_m": 5297.0,
+  "reference_years": [
+    1991,
+    2020
+  ],
+  "windows": {
+    "1d": {
+      "precip_total_mm": 0.0,
+      "precip_reference_median_mm": 0.7,
+      "precip": {
+        "value": 0.0,
+        "score": 0.0,
+        "p10": 0.0,
+        "p90": 15.490000000000006,
+        "method": "percentile"
+      },
+      "temp_mean_c": -19.3,
+      "temp_reference_mean_c": -18.45,
+      "temp_anomaly_c": -0.85,
+      "temp": {
+        "value": -19.3,
+        "score": 0.42155425219941306,
+        "p10": -22.174999999999997,
+        "p90": -15.354999999999999,
+        "method": "percentile"
+      },
+      "n_reference_years": 30
+    },
+    "3d": {
+      "precip_total_mm": 10.1,
+      "precip_reference_median_mm": 8.6,
+      "precip": {
+        "value": 10.1,
+        "score": 0.3184110970996216,
+        "p10": 0.0,
+        "p90": 31.720000000000006,
+        "method": "percentile"
+      },
+      "temp_mean_c": -20.18,
+      "temp_reference_mean_c": -18.89,
+      "temp_anomaly_c": -1.29,
+      "temp": {
+        "value": -20.183333333333334,
+        "score": 0.2582745523602819,
+        "p10": -21.77,
+        "p90": -15.626666666666663,
+        "method": "percentile"
+      },
+      "n_reference_years": 30
+    },
+    "7d": {
+      "precip_total_mm": 11.7,
+      "precip_reference_median_mm": 18.2,
+      "precip": {
+        "value": 11.7,
+        "score": 0.22105263157894742,
+        "p10": 0.7800000000000001,
+        "p90": 50.17999999999999,
+        "method": "percentile"
+      },
+      "temp_mean_c": -18.56,
+      "temp_reference_mean_c": -19.31,
+      "temp_anomaly_c": 0.75,
+      "temp": {
+        "value": -18.55714285714286,
+        "score": 0.6494590417310656,
+        "p10": -21.55857142857143,
+        "p90": -16.937142857142856,
+        "method": "percentile"
+      },
+      "n_reference_years": 30
+    },
+    "30d": {
+      "precip_total_mm": 19.3,
+      "precip_reference_median_mm": 115.7,
+      "precip": {
+        "value": 19.299999999999997,
+        "score": 0.0,
+        "p10": 23.15,
+        "p90": 194.72000000000006,
+        "method": "percentile"
+      },
+      "temp_mean_c": -17.98,
+      "temp_reference_mean_c": -20.15,
+      "temp_anomaly_c": 2.16,
+      "temp": {
+        "value": -17.983333333333334,
+        "score": 1.0,
+        "p10": -21.59433333333333,
+        "p90": -18.12466666666667,
+        "method": "percentile"
+      },
+      "n_reference_years": 30
+    }
+  },
+  "winter_mean_temperature_trend": {
+    "c_per_decade": 0.049,
+    "n_winters": 29
+  },
+  "note": "ERA5 grid-cell values; anomalies relative to the cell's own 1991-2020 climate. Event-level context for the instability record; not a ranking input and not evidence of causation."
+}
