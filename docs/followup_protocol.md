@@ -46,6 +46,10 @@ Covered by A (tests 2–3), now with measured energy instead of an area × drop 
 - **Blind labelling:** points renamed C1…C70 in random order; the stratum key is kept in a separate file.
   Label = `change` if the surface type differs between t1 and t2, `no_change` if it does not, `skip` if unsure
   or mixed. Shadow or brightness differences alone are not change.
+- **Stopping rule** (added 2 Nov 2026, after the points were generated and before any was labelled): points are
+  labelled in ID order from C1; labelling may stop after C40, C50, C60 or C70. Because IDs are in random order,
+  the labelled prefix is a random subsample; every labelled point is used and per-stratum weights use the
+  number actually labelled in each stratum.
 - **Estimates:** area-weighted precision, recall and F1 of "change", overall accuracy and estimated change area,
   with 95 % bootstrap intervals, for each U-Net seed's change map and for the rule baseline.
 
