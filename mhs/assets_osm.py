@@ -11,7 +11,8 @@ import urllib.parse
 import urllib.request
 from pathlib import Path
 
-ENDPOINTS = ["https://overpass-api.de/api/interpreter", "https://overpass.kumi.systems/api/interpreter"]
+ENDPOINTS = ["https://overpass-api.de/api/interpreter", "https://overpass.kumi.systems/api/interpreter",
+             "https://overpass.private.coffee/api/interpreter"]
 
 
 def _query(bbox) -> str:
@@ -39,16 +40,21 @@ def _type(tags: dict) -> str:
 
 def fetch_osm_assets(cfg: dict, out_path: str | Path, timeout: int = 180) -> dict:
     bbox = cfg["case"]["bbox"]
+    import time
+
     data, last = None, None
-    for url in ENDPOINTS:
+    for url in [u for _ in range(3) for u in ENDPOINTS]:  # up to 3 rounds over the mirrors
+        if data is not None:
+            break
         try:
             req = urllib.request.Request(url, data=urllib.parse.urlencode({"data": _query(bbox)}).encode(),
                                          headers={"User-Agent": "mhs-research/0.1"})
             with urllib.request.urlopen(req, timeout=timeout) as r:
                 data = json.loads(r.read())
-            break
-        except Exception as e:  # try the next mirror
+        except Exception as e:  # busy server: wait, then try the next mirror
             last = e
+            print(f"Overpass {url} failed ({type(e).__name__}); retrying ...")
+            time.sleep(10)
     if data is None:
         raise RuntimeError(f"Overpass request failed on all endpoints: {last}")
     date = (data.get("osm3s") or {}).get("timestamp_osm_base")
