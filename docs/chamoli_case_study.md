@@ -405,6 +405,10 @@ Next steps, in order of expected value:
 
 ---
 
+## Addendum: follow-up experiments
+
+Follow-up analyses run in November 2026 under a protocol fixed in advance ([followup_protocol.md](followup_protocol.md)) are reported in [followup_results.md](followup_results.md): the 2 m DEM difference detects the source (up to 183 m of lowering within 500 m) that optical imagery missed and makes the ranking test possible (source zone in the top 2.5 %, but a simple volume ranking does better); change-detection accuracy could be judged on only 39 % of sampled points; and the 30 days before the event were the driest and warmest of 1991–2020 at the source's ERA5 cell.
+
 ## Data and code availability
 
 Code, configuration, evaluation outputs and Kaggle notebooks: this repository. Concept paper:

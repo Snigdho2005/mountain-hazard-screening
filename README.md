@@ -31,7 +31,7 @@ Full write-up: **[docs/chamoli_case_study.md](docs/chamoli_case_study.md)**. Out
 
 ![Route from the documented source](results/chamoli_2021/figures/event_route_rules.png)
 
-**Follow-up experiments** (protocol fixed in advance, 2 Nov 2026): source detection, volume and energy from the 2 m DEM difference; change-detection accuracy; rainfall/temperature indicators. See [docs/followup_protocol.md](docs/followup_protocol.md).
+**Follow-up experiments** (protocol fixed in advance, 2 Nov 2026): source detection, volume and energy from the 2 m DEM difference; change-detection accuracy; rainfall/temperature indicators. Protocol: [docs/followup_protocol.md](docs/followup_protocol.md); results: [docs/followup_results.md](docs/followup_results.md) (elevation change detects the source; framework ranks it in the top 2.5 % but a simple volume ranking does better).
 
 Every output is a screening product for specialist review. Energy is **available gravitational potential energy**. It is not a failure probability, runout, impact force or loss. Routes are **screening corridors**, not runout or inundation boundaries.
 

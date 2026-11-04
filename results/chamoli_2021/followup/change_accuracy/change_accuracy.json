@@ -1,0 +1,147 @@
+{
+  "n_labelled": {
+    "both": 10,
+    "unet_only": 4,
+    "rules_only": 2,
+    "neither": 11
+  },
+  "n_skipped_or_blank": 43,
+  "strata_pixel_counts": {
+    "both": 3487,
+    "unet_only": 3692,
+    "rules_only": 70276,
+    "neither": 601336
+  },
+  "labelled_change_by_stratum": {
+    "both": 10,
+    "unet_only": 0,
+    "rules_only": 2,
+    "neither": 0
+  },
+  "maps": {
+    "c_unet_s0: class change": {
+      "estimate": {
+        "precision": 0.48572224543808323,
+        "recall": 0.0472730230603419,
+        "f1": 0.08616046057670923,
+        "overall_accuracy": 0.8910297867826769,
+        "change_area_fraction": 0.10866820567744713
+      },
+      "ci95": {
+        "precision": [
+          0.48572224543808323,
+          0.48572224543808323
+        ],
+        "recall": [
+          0.0472730230603419,
+          0.0472730230603419
+        ],
+        "f1": [
+          0.08616046057670923,
+          0.08616046057670923
+        ],
+        "overall_accuracy": [
+          0.8910297867826769,
+          0.8910297867826769
+        ],
+        "change_area_fraction": [
+          0.10866820567744713,
+          0.10866820567744713
+        ]
+      }
+    },
+    "c_unet_s1: class change": {
+      "estimate": {
+        "precision": 1.0,
+        "recall": 0.5094546046120684,
+        "f1": 0.6750181198632321,
+        "overall_accuracy": 0.9466933120798596,
+        "change_area_fraction": 0.10866820567744714
+      },
+      "ci95": {
+        "precision": [
+          1.0,
+          1.0
+        ],
+        "recall": [
+          0.02363651153017095,
+          0.9952726976939659
+        ],
+        "f1": [
+          0.04618145457675829,
+          0.9976307487635662
+        ],
+        "overall_accuracy": [
+          0.8939003316190108,
+          0.9994862925407084
+        ],
+        "change_area_fraction": [
+          0.10866820567744714,
+          0.10866820567744714
+        ]
+      }
+    },
+    "c_unet_s2: class change": {
+      "estimate": {
+        "precision": 1.0,
+        "recall": 0.03781841844827352,
+        "f1": 0.07288060758223756,
+        "overall_accuracy": 0.8954414539968856,
+        "change_area_fraction": 0.10866820567744714
+      },
+      "ci95": {
+        "precision": [
+          1.0,
+          1.0
+        ],
+        "recall": [
+          0.02363651153017095,
+          0.0472730230603419
+        ],
+        "f1": [
+          0.04618145457675829,
+          0.09027831715210355
+        ],
+        "overall_accuracy": [
+          0.8939003316190108,
+          0.8964688689154688
+        ],
+        "change_area_fraction": [
+          0.10866820567744714,
+          0.10866820567744714
+        ]
+      }
+    },
+    "rule baseline (classes + CVA)": {
+      "estimate": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "overall_accuracy": 1.0,
+        "change_area_fraction": 0.10866820567744713
+      },
+      "ci95": {
+        "precision": [
+          1.0,
+          1.0
+        ],
+        "recall": [
+          1.0,
+          1.0
+        ],
+        "f1": [
+          1.0,
+          1.0
+        ],
+        "overall_accuracy": [
+          1.0,
+          1.0
+        ],
+        "change_area_fraction": [
+          0.10866820567744714,
+          0.10866820567744714
+        ]
+      }
+    }
+  }
+}

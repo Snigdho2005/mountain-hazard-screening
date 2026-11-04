@@ -1,0 +1,362 @@
+{
+ "strata_pixel_counts": {
+  "both": 3487,
+  "unet_only": 3692,
+  "rules_only": 70276,
+  "neither": 601336
+ },
+ "points": {
+  "C1": {
+   "stratum": "rules_only",
+   "row": 2048,
+   "col": 1936
+  },
+  "C2": {
+   "stratum": "neither",
+   "row": 22,
+   "col": 2074
+  },
+  "C3": {
+   "stratum": "neither",
+   "row": 521,
+   "col": 2015
+  },
+  "C4": {
+   "stratum": "unet_only",
+   "row": 890,
+   "col": 1722
+  },
+  "C5": {
+   "stratum": "both",
+   "row": 1058,
+   "col": 1734
+  },
+  "C6": {
+   "stratum": "both",
+   "row": 1100,
+   "col": 1801
+  },
+  "C7": {
+   "stratum": "neither",
+   "row": 398,
+   "col": 1908
+  },
+  "C8": {
+   "stratum": "neither",
+   "row": 867,
+   "col": 1734
+  },
+  "C9": {
+   "stratum": "unet_only",
+   "row": 1148,
+   "col": 2129
+  },
+  "C10": {
+   "stratum": "neither",
+   "row": 936,
+   "col": 1727
+  },
+  "C11": {
+   "stratum": "rules_only",
+   "row": 536,
+   "col": 1954
+  },
+  "C12": {
+   "stratum": "unet_only",
+   "row": 1343,
+   "col": 1718
+  },
+  "C13": {
+   "stratum": "neither",
+   "row": 1767,
+   "col": 2074
+  },
+  "C14": {
+   "stratum": "neither",
+   "row": 381,
+   "col": 1902
+  },
+  "C15": {
+   "stratum": "both",
+   "row": 1131,
+   "col": 1751
+  },
+  "C16": {
+   "stratum": "rules_only",
+   "row": 1058,
+   "col": 1750
+  },
+  "C17": {
+   "stratum": "unet_only",
+   "row": 1158,
+   "col": 1798
+  },
+  "C18": {
+   "stratum": "neither",
+   "row": 22,
+   "col": 1686
+  },
+  "C19": {
+   "stratum": "unet_only",
+   "row": 958,
+   "col": 1831
+  },
+  "C20": {
+   "stratum": "rules_only",
+   "row": 866,
+   "col": 1682
+  },
+  "C21": {
+   "stratum": "unet_only",
+   "row": 305,
+   "col": 1888
+  },
+  "C22": {
+   "stratum": "unet_only",
+   "row": 1364,
+   "col": 1990
+  },
+  "C23": {
+   "stratum": "neither",
+   "row": 913,
+   "col": 1669
+  },
+  "C24": {
+   "stratum": "both",
+   "row": 1871,
+   "col": 1817
+  },
+  "C25": {
+   "stratum": "neither",
+   "row": 463,
+   "col": 2135
+  },
+  "C26": {
+   "stratum": "both",
+   "row": 1075,
+   "col": 1993
+  },
+  "C27": {
+   "stratum": "unet_only",
+   "row": 821,
+   "col": 1822
+  },
+  "C28": {
+   "stratum": "neither",
+   "row": 894,
+   "col": 1704
+  },
+  "C29": {
+   "stratum": "neither",
+   "row": 895,
+   "col": 1687
+  },
+  "C30": {
+   "stratum": "neither",
+   "row": 1004,
+   "col": 1992
+  },
+  "C31": {
+   "stratum": "neither",
+   "row": 2207,
+   "col": 1866
+  },
+  "C32": {
+   "stratum": "neither",
+   "row": 1137,
+   "col": 1788
+  },
+  "C33": {
+   "stratum": "rules_only",
+   "row": 1123,
+   "col": 1764
+  },
+  "C34": {
+   "stratum": "rules_only",
+   "row": 1122,
+   "col": 1734
+  },
+  "C35": {
+   "stratum": "both",
+   "row": 365,
+   "col": 2086
+  },
+  "C36": {
+   "stratum": "rules_only",
+   "row": 2150,
+   "col": 1878
+  },
+  "C37": {
+   "stratum": "both",
+   "row": 707,
+   "col": 1979
+  },
+  "C38": {
+   "stratum": "both",
+   "row": 1047,
+   "col": 1749
+  },
+  "C39": {
+   "stratum": "rules_only",
+   "row": 1421,
+   "col": 1972
+  },
+  "C40": {
+   "stratum": "neither",
+   "row": 1743,
+   "col": 1940
+  },
+  "C41": {
+   "stratum": "neither",
+   "row": 1583,
+   "col": 2034
+  },
+  "C42": {
+   "stratum": "both",
+   "row": 1089,
+   "col": 1769
+  },
+  "C43": {
+   "stratum": "neither",
+   "row": 177,
+   "col": 1727
+  },
+  "C44": {
+   "stratum": "both",
+   "row": 1185,
+   "col": 1818
+  },
+  "C45": {
+   "stratum": "unet_only",
+   "row": 1163,
+   "col": 1918
+  },
+  "C46": {
+   "stratum": "rules_only",
+   "row": 1909,
+   "col": 2113
+  },
+  "C47": {
+   "stratum": "rules_only",
+   "row": 1665,
+   "col": 2071
+  },
+  "C48": {
+   "stratum": "unet_only",
+   "row": 349,
+   "col": 1990
+  },
+  "C49": {
+   "stratum": "neither",
+   "row": 1472,
+   "col": 1910
+  },
+  "C50": {
+   "stratum": "unet_only",
+   "row": 669,
+   "col": 1727
+  },
+  "C51": {
+   "stratum": "unet_only",
+   "row": 64,
+   "col": 1867
+  },
+  "C52": {
+   "stratum": "both",
+   "row": 876,
+   "col": 1683
+  },
+  "C53": {
+   "stratum": "rules_only",
+   "row": 2287,
+   "col": 1917
+  },
+  "C54": {
+   "stratum": "neither",
+   "row": 1988,
+   "col": 2033
+  },
+  "C55": {
+   "stratum": "rules_only",
+   "row": 727,
+   "col": 1912
+  },
+  "C56": {
+   "stratum": "both",
+   "row": 877,
+   "col": 1709
+  },
+  "C57": {
+   "stratum": "neither",
+   "row": 181,
+   "col": 2016
+  },
+  "C58": {
+   "stratum": "neither",
+   "row": 1135,
+   "col": 2029
+  },
+  "C59": {
+   "stratum": "rules_only",
+   "row": 1903,
+   "col": 2078
+  },
+  "C60": {
+   "stratum": "rules_only",
+   "row": 1174,
+   "col": 2089
+  },
+  "C61": {
+   "stratum": "neither",
+   "row": 1096,
+   "col": 1958
+  },
+  "C62": {
+   "stratum": "neither",
+   "row": 461,
+   "col": 1985
+  },
+  "C63": {
+   "stratum": "unet_only",
+   "row": 263,
+   "col": 1884
+  },
+  "C64": {
+   "stratum": "both",
+   "row": 1096,
+   "col": 1745
+  },
+  "C65": {
+   "stratum": "unet_only",
+   "row": 639,
+   "col": 1762
+  },
+  "C66": {
+   "stratum": "both",
+   "row": 1031,
+   "col": 1740
+  },
+  "C67": {
+   "stratum": "both",
+   "row": 1113,
+   "col": 1747
+  },
+  "C68": {
+   "stratum": "neither",
+   "row": 729,
+   "col": 2018
+  },
+  "C69": {
+   "stratum": "rules_only",
+   "row": 1177,
+   "col": 1929
+  },
+  "C70": {
+   "stratum": "unet_only",
+   "row": 737,
+   "col": 1892
+  }
+ },
+ "run_dir": "runs/c_unet_s0",
+ "seed": 29
+}
