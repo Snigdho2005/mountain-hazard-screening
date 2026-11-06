@@ -8,7 +8,7 @@
 ## Abstract
 
 A companion concept paper (*A Food for Thought: Physics-Guided Mapping of Mountain Hazard Source Zones from
-Multi-Temporal Satellite Imagery*; [concept_paper.docx](concept_paper.docx)) proposed screening mountain catchments by keeping four kinds of evidence
+Multi-Temporal Satellite Imagery*; [concept_paper.docx](https://github.com/Snigdho2005/mountain-hazard-screening/blob/f39808c2579c62450b1c3fc21cc2caf4e334f129/docs/concept_paper.docx)) proposed screening mountain catchments by keeping four kinds of evidence
 separate: the potential energy of a source, signs of instability, the downslope route, and exposure along it.
 It reported no data, model or results. This document implements the proposed minimum pipeline as open code
 and tests it retrospectively on the 7 February 2021 Chamoli (Uttarakhand) rock–ice avalanche, using
@@ -412,7 +412,7 @@ Follow-up analyses run in November 2026 under a protocol fixed in advance ([foll
 ## Data and code availability
 
 Code, configuration, evaluation outputs and Kaggle notebooks: this repository. Concept paper:
-`docs/concept_paper.docx`. Reference labels (63 polygons, fields `class` and `date`):
+[`concept_paper.docx`](https://github.com/Snigdho2005/mountain-hazard-screening/blob/f39808c2579c62450b1c3fc21cc2caf4e334f129/docs/concept_paper.docx) (earlier version of the repository). Reference labels (63 polygons, fields `class` and `date`):
 `results/chamoli_2021/labels.geojson`. Sentinel-2 L2A and
 Copernicus GLO-30 are open data (ESA / Copernicus); OpenStreetMap data © OpenStreetMap contributors (ODbL).
 

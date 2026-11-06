@@ -1,7 +1,9 @@
 # Mountain Hazard Screening (`mhs`)
 
-Working implementation of the concept paper *Physics-Guided Mapping of Mountain Hazard Source Zones from Multi-Temporal Satellite Imagery* ([docs/concept_paper.docx](docs/concept_paper.docx)).
-It runs the paper's minimum viable pipeline end to end:
+Code for the paper **[Deep Learning for Satellite-Based Mountain Hazard Screening: A Retrospective Failure Analysis on the 2021 Chamoli Rock-Ice Avalanche](docs/Deep_Learning_Mountain_Hazard_Screening_Chamoli_2021.docx)** (Snigdhajyoti Rakshit, VIT Bhopal University).
+It implements the earlier concept paper *Physics-Guided Mapping of Mountain Hazard Source Zones from Multi-Temporal Satellite Imagery* ([earlier version](https://github.com/Snigdho2005/mountain-hazard-screening/blob/f39808c2579c62450b1c3fc21cc2caf4e334f129/docs/concept_paper.docx)) and runs its minimum viable pipeline end to end:
+
+![Screening pipeline](docs/figures/pipeline_overview.png)
 
 ```
 Sentinel-2 (2-3 dates) + DEM
@@ -16,6 +18,10 @@ Sentinel-2 (2-3 dates) + DEM
 ```
 
 A rule-based baseline (spectral-index classes + change-vector differencing) runs alongside on the same grid and the same rules.
+
+![U-Net surface-mapping model](docs/figures/unet_architecture.png)
+
+Editable sources of both diagrams (open in [diagrams.net](https://app.diagrams.net)): [`pipeline_overview.drawio`](docs/figures/pipeline_overview.drawio), [`unet_architecture.drawio`](docs/figures/unet_architecture.drawio).
 
 ## First case study: 2021 Chamoli rock–ice avalanche
 
@@ -39,7 +45,7 @@ Every output is a screening product for specialist review. Energy is **available
 
 ```bash
 pip install -e ".[dev]"            # + ".[acquire]" where internet is available
-pytest -q                          # 19 tests
+pytest -q                          # 20 tests
 mhs demo --out demo_output         # synthetic dev catchment → unseen test catchment, ~2 min on CPU
 mhs chamoli                        # paper Section 9 sensitivity calculation
 ```
@@ -69,9 +75,9 @@ The notebooks that produced the case-study numbers are `notebooks/kaggle_01_froz
 | `mhs change-points CONFIG RUN --out DIR` | Blind stratified random points for change/no-change labelling |
 | `mhs change-accuracy CONFIG --labels F --key F RUN...` | Area-weighted change precision, recall, F1 with bootstrap intervals |
 
-## Where each part of the paper lives
+## Where each part of the concept paper lives
 
-| Paper | Module |
+| Concept paper | Module |
 |---|---|
 | §3 data, Table 1 input preparation | `acquire.py`, `preprocess.py` |
 | §4 U-Net surface mapping, §4.2 training record | `model/unet.py`, `model/train.py` |
