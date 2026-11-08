@@ -41,6 +41,37 @@ Full write-up: **[docs/chamoli_case_study.md](docs/chamoli_case_study.md)**. Out
 
 Every output is a screening product for specialist review. Energy is **available gravitational potential energy**. It is not a failure probability, runout, impact force or loss. Routes are **screening corridors**, not runout or inundation boundaries.
 
+## Limitations and drawbacks
+
+The method and its results have clear weaknesses. They are listed here so that nobody reads more into the numbers than they support.
+
+**What the study can and cannot claim**
+- **Retrospective, single event.** Settings were developed and tested on the same Chamoli scene, so this is not an independent test. A second event and quiet (non-event) catchments are still needed.
+- **Detection after the fact, not prediction.** The pipeline finds ground that has already changed. It does not forecast which slope will fail next.
+- **The follow-up experiments are not blind.** They were run after the first test had shown where the method failed.
+
+**Where the method failed**
+- **Source missed by optical change detection.** The source face was 73 % in shadow in the winter image before the event, so the U-Net and the rules both missed it. Without a detected source, the ranking and removal tests could not be evaluated on optical zones.
+- **Real change suppressed.** On the change-accuracy sample, the U-Net's confidence and illumination gates removed real snow → ground change that the simple rule baseline kept. All four points flagged by the U-Net alone were false alarms.
+- **Flawed ranking rule.** Zones are sorted by exposure count before energy. With the DEM-difference zones, the source therefore ranked 14th of 552, while ranking by volume or area alone put it 2nd. The rule was not changed afterwards, because that would mean tuning on the answer.
+- **Volume underestimated.** The zone picked by the pre-declared rule gave 0.52 × the published volume. Only a zone chosen after the fact matched it.
+
+**Weak parts of the model**
+- **Rock and soil are not separable** (F1 ≈ 0.3).
+- **Water has no training labels,** so the six-class model in practice learns five classes.
+- **Results vary a lot between runs.** Macro F1 ranged from 0.581 to 0.786 over ten runs, partly from GPU non-determinism. One run alone is not a reliable estimate.
+- **The test strip is small,** and all reference labels were drawn by one person.
+
+**Data limits**
+- **61 % of change-sample points could not be judged,** mostly because of shadow. All change-accuracy figures apply only to sunlit, unmixed ground, and per-stratum intervals are wide (some strata rest on 2–4 labels).
+- **Rarely available input.** Elevation change found the source, but it needs a 2 m DEM difference. Such DEMs are rarely available soon after an event.
+- **Incomplete asset data.** OpenStreetMap lacks both hydropower plants that were damaged, so exposure counts are incomplete.
+- **Coarse climate data.** The indicators come from one ~31 km ERA5 cell. They are event-level context and cannot rank zones or show cause.
+
+**Scope of the outputs**
+- **Energy is available potential energy only.** It is not a failure probability, runout distance, impact force or loss.
+- **Routes are screening corridors only.** They come from steepest-descent (D8) routing and are not runout or flood models.
+
 ## Quick start
 
 ```bash
